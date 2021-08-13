@@ -17,17 +17,8 @@
 
 </head>
 <body>
-    <ul class="nav justify-content-end">
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('categories.index') }}">{{ __('Categories') }}</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('categories.create') }}">{{ __('Create category') }}</a>
-        </li>
-    </ul>
 
-    <main class="py-4">
-        @yield('content')
-    </main>
+     @yield('content')
+   
 </body>
 </html>

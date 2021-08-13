@@ -1,6 +1,6 @@
 @extends('products.layout')
 
-  
+
 
 @section('content')
 
@@ -24,7 +24,7 @@
 
 </div>
 
-   
+
 
 @if ($errors->any())
 
@@ -46,13 +46,13 @@
 
 @endif
 
-   
+
 
 <form action="{{ url('store_products') }}" method="POST">
 
     @csrf
 
-  
+
 
      <div class="row">
 
@@ -80,6 +80,27 @@
 
         </div>
 
+         <div class="col-xs-12 col-sm-12 col-md-12">
+
+             <div class="form-group">
+
+                 <strong>Category:</strong>
+
+                 <select class="form-control" name="category_id">
+
+                     <option>Select Product</option>
+
+                     @foreach ($category as $key )
+                         <option value="{{ $key->parent_id }}" >
+                             {{ $key->name }}
+                         </option>
+                     @endforeach
+                 </select>
+
+             </div>
+
+         </div>
+
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
 
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -88,7 +109,7 @@
 
     </div>
 
-   
+
 
 </form>
 

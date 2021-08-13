@@ -1,42 +1,97 @@
-@extends('layouts.master')
+@extends('layout.master')
+
+   
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-10">
-            <div class="card">
-                <div class="card-header">
-                    Edit Category
-                    <a href="{{ route('categories.create') }}" class="btn btn-primary float-right">Create category</a>
-                </div>
+    <div class="row">
 
-                <div class="card-body">
-                    
-                    @include('partials.alerts')
+        <div class="col-lg-12 margin-tb">
 
-                    <form action="{{ route('categories.update', ['category'=>$category->id] ) }}" method="post">
-                        {{ csrf_field() }}
-                        <input name="_method" type="hidden" value="PUT">
-                        <div class="form-group">
-                            <label for="name">Category Name:</label>
-                            <input type="name" class="form-control" id="name" name="name" value="{{ $category->name }}">
-                            <span class="text-danger">{{ $errors->first('name') }}</span>
-                        </div>
-                        <div class="form-group">
-                            <label for="pwd">Parent Category:</label>
-                            <select class="form-control" name="parent_category">
-                                <option>Select a category</option>
-                                @foreach($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                @endforeach
-                            </select>
-                            <span class="text-danger">{{ $errors->first('parent_category') }}</span>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
+            <div class="pull-left">
+
+                <h2>Edit Product</h2>
+
             </div>
+
+            <div class="pull-right">
+
+                <a class="btn btn-primary" href="{{ url('categories') }}"> Back</a>
+
+            </div>
+
         </div>
+
     </div>
+
+   
+
+    @if ($errors->any())
+
+        <div class="alert alert-danger">
+
+            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+
+            <ul>
+
+                @foreach ($errors->all() as $error)
+
+                    <li>{{ $error }}</li>
+
+                @endforeach
+
+            </ul>
+
+        </div>
+
+    @endif
+
+  
+
+    <form action="{{ url('category_update',$category->id) }}" method="POST">
+
+        @csrf
+
+        @method('PUT')
+
+   
+
+         <div class="row">
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+
+                <div class="form-group">
+
+                    <strong>Name:</strong>
+
+                    <input type="text" name="name" value="{{ $category->name }}" class="form-control" placeholder="Name">
+
+                </div>
+
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+
+                <div class="form-group">
+
+                    <strong>Parent id:</strong>
+
+                    <input type="text" name="parent_id" value="{{ $category->parent_id }}" class="form-control" placeholder="parent_id">
+
+                </div>
+
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+
+              <button type="submit" class="btn btn-primary">Submit</button>
+
+            </div>
+
+        </div>
+
+   
+
+    </form>
 </div>
 @endsection
